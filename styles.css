@@ -15,7 +15,7 @@
     sans-serif;
 }
 
-div {
+.game-body {
   display: flex;
   width: 100vw;
   height: 100vh;
@@ -26,6 +26,8 @@ div {
     hsla(330, 100%, 50%, 1),
     hsla(340, 100%, 87%, 1)
   );
+  display: flex;
+  flex-direction: column;
 }
 
 h1 {
@@ -39,4 +41,30 @@ h1 {
   color: transparent;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+button {
+  width: 200px;
+  height: 200px;
+  background-color: transparent;
+  border: 2px solid rgba(0, 0, 0, 0);
+}
+
+.start {
+  font-size: 100px;
+  color: white;
+}
+.results {
+  font-size: 100px;
+  color: white;
+  text-align: center;
+}
+
+.score {
+  font-size: 100px;
+  color: white;
+}
+
+.hidden {
+  display: none;
 }

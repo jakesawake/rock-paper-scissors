@@ -1,8 +1,16 @@
 "use strict";
 
-// NOTE: creating a function that returns a rock, paper, or scissors
+const rock = document.querySelector(".rock");
+const paper = document.querySelector(".paper");
+const scissors = document.querySelector(".scissors");
+const results = document.querySelector(".results");
+const score = document.querySelector(".score");
+const start = document.querySelector(".start");
+const icons = document.querySelector(".icons");
 
-// NOTE: creating a function that returns a string based on the random number
+// creating a function that returns a rock, paper, or scissors
+
+// creating a function that returns a string based on the random number
 
 const getComputerChoice = function () {
   let num = Math.floor(Math.random() * 3);
@@ -15,7 +23,7 @@ const getComputerChoice = function () {
   }
 };
 
-// NOTE: creating a function that returns a string based on the user's answer to the prompt
+// creating a function that returns a string based on the user's answer to the prompt
 
 const getHumanChoice = function (choice) {
   if (choice === "rock") {
@@ -27,37 +35,84 @@ const getHumanChoice = function (choice) {
   }
 };
 
-// NOTE: creating the variables below to keep track of the score for the human and computer
+// creating the variables below to keep track of the score for the human and computer
 let humanScore = 0;
 let computerScore = 0;
 
-// NOTE: creating a playRound function that expects humanChoice and computerChoice as arguements
+// creating a playRound function that expects humanChoice and computerChoice as arguements
+
 const playRound = function (humanChoice, computerChoice) {
-  console.log("human:", humanChoice, "computer:", computerChoice); // NOTE: printing string to show the player's choices
+  console.log("human:", humanChoice, "computer:", computerChoice); // printing string to show the player's choices
   if (humanChoice === computerChoice) {
+    results.textContent = `It's a Tie!`; // if its a tie
+    score.textContent = `${humanScore} | ${computerScore}`; // displaying score
     console.log("Tie!", humanScore, computerScore);
-    // NOTE: possible outcomes of the game, we don't have to specify every single outcome because of our else statement
+    // possible outcomes of the game, we don't have to specify every single outcome because of our else statement
   } else if (
     (humanChoice === "rock" && computerChoice === "scissors") ||
     (humanChoice === "scissors" && computerChoice === "paper") ||
     (humanChoice === "paper" && computerChoice === "rock")
   ) {
-    humanScore++; // NOTE: incrementing the score for humans if they win
+    humanScore++; // incrementing the score for humans if they win
+    results.textContent = "Human Wins!"; // if human wins
+    score.textContent = `${humanScore} | ${computerScore}`; // displaying score
     console.log("human wins!", humanScore, computerScore);
   } else {
-    computerScore++; // NOTE: incrementing the score for the computer if they win
+    computerScore++; // incrementing the score for the computer if they win
+    results.textContent = "Computer Wins!"; // if computer wins
+    score.textContent = `${humanScore} | ${computerScore}`; // displaying score
     console.log("computer wins!", humanScore, computerScore);
   }
 };
 
-// NOTE: used a for loop to play the game up to 5 rounds
-for (let i = 0; i < 5; i++) {
-  // NOTE: re-prompting the human every round
-  const answer = prompt("choose Rock, Paper, or Scissors!").toLowerCase();
-  const humanSelection = getHumanChoice(answer); // NOTE: calling our getHumanChoice function with humanSelection
-  const computerSelection = getComputerChoice(); // NOTE: calling our getComputerChoice function with computerSelection
-  // NOTE: checks if truthy
-  if (humanSelection) {
-    playRound(humanSelection, computerSelection); // NOTE: only plays if valid
+const startGame = icons.addEventListener("click", () => {
+  start.classList.add("hidden");
+});
+
+let round = 0;
+const maxRounds = 5;
+
+rock.addEventListener("click", () => {
+  if (round === maxRounds) {
+    if (humanScore === computerScore) {
+      results.textContent = "It's a tie! thanks for playing!";
+    } else if (humanScore > computerScore) {
+      results.textContent = "Human wins!, thanks for playing!";
+    } else {
+      results.textContent = "Computer wins!, thanks for playing!";
+    }
+  } else if (round < maxRounds) {
+    playRound(getHumanChoice("rock"), getComputerChoice());
+    round++;
   }
-}
+});
+
+paper.addEventListener("click", () => {
+  if (round === maxRounds) {
+    if (humanScore === computerScore) {
+      results.textContent = "It's a tie! thanks for playing!";
+    } else if (humanScore > computerScore) {
+      results.textContent = "Human wins!, thanks for playing!";
+    } else {
+      results.textContent = "Computer wins!, thanks for playing!";
+    }
+  } else if (round < maxRounds) {
+    playRound(getHumanChoice("paper"), getComputerChoice());
+    round++;
+  }
+});
+
+scissors.addEventListener("click", () => {
+  if (round === maxRounds) {
+    if (humanScore === computerScore) {
+      results.textContent = "It's a tie! thanks for playing!";
+    } else if (humanScore > computerScore) {
+      results.textContent = "Human wins!, thanks for playing!";
+    } else {
+      results.textContent = "Computer wins!, thanks for playing!";
+    }
+  } else if (round < maxRounds) {
+    playRound(getHumanChoice("scissors"), getComputerChoice());
+    round++;
+  }
+});
